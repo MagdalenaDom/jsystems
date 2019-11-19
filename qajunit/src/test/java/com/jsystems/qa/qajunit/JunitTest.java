@@ -12,15 +12,27 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("Junit tests")
-@Tag("unit")
+@Tag("UniTest")
+public class JunitTest extends ConfigJunit {
 
-    public class JunitTest {
+   @BeforeEach
+   public void setupEach(TestInfo testInfo){
+       System.out.println("===========BeforeEach=========");
+       System.out.println(testInfo.getDisplayName());
+       System.out.println(testInfo.getTags());
+       System.out.println(testInfo.getTestMethod());
+   }
+
+   @AfterEach
+   public void tearDownEach(){
+       System.out.println("============AfterEach===========");
+   }
 
         final String stringTestowy = "stringTestowy";
 
         @DisplayName("Junit tests")
         @Test
-  //      @RepeatedTest(5)
+        //      @RepeatedTest(5)
         @Disabled("bug: import, 1230")
         @Tag("first")
         public void firstTest() {
@@ -37,33 +49,35 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
         @Tag("second")
         @Test
-    public void secondTest(){
+        public void secondTest() {
 
-            System.out.println(0.2*0.2);
+            System.out.println(0.2 * 0.2);
             double result = (new BigDecimal("0.2").multiply(new BigDecimal("0.2")).doubleValue());
             System.out.println(result);
-            assertTrue(result==0.04);
-            assertFalse(0.2*0.2==0.04);
+            assertTrue(result == 0.04);
+            assertFalse(0.2 * 0.2 == 0.04);
 
         }
 
         @Nested
-    public class NestedTest{
+        public class NestedTest {
 
-            List<Integer>list1 = Arrays.asList(1,2,3,4,5);
-            List<Integer>list2 = Arrays.asList(3,4,5);
+            List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5);
+            List<Integer> list2 = Arrays.asList(3, 4, 5);
 
             @Test
-            public void firstNestedTest(){
+            public void firstNestedTest() {
                 assertTrue(list1.containsAll(list2));
                 assertThat(list1).hasSize(5);
-                assertThat(list1).containsAnyOf(1,2,3);
+                assertThat(list1).containsAnyOf(1, 2, 3);
 
             }
+
             @Test
-            public void seondNestedTest(){
+            public void seondNestedTest() {
 
             }
         }
+
 }
 
