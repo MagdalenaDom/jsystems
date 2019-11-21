@@ -1,5 +1,6 @@
 package com.jsystems.qa.qaapi;
 
+import com.jsystems.qa.qaapi.service.UserService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -46,16 +47,16 @@ public class ApiTest {
     @Test
     @DisplayName("Should returns correctly user list using jsonPath mapping")
     public void jsonPathTest(){
-        List<User> users = RestAssured
-                .given()
-                .get("http://www.mocky.io/v2/5a6a58222e0000d0377a7789")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .body()
-                .jsonPath()
-                .getList("", User.class);
+        List<User> users = UserService.getUsers();
+//                .given()
+//                .get("http://www.mocky.io/v2/5a6a58222e0000d0377a7789")
+//                .then()
+//                .assertThat()
+//                .statusCode(200)
+//                .extract()
+//                .body()
+//                .jsonPath()
+//                .getList("", User.class);
 
         assertTrue(users.get(0).imie.equals("Piotr"));
         assertTrue(users.get(0).nazwisko.equals("Kowalski"));
