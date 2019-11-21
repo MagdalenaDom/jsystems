@@ -1,10 +1,15 @@
 package com.jsystems.qa.qaapi;
 
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.hamcrest.core.IsEqual.equalTo;
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Tag("ApiTest")
 public class ApiTest {
@@ -21,4 +26,43 @@ public class ApiTest {
                 .body("name", equalTo("Piotr"))
                 .body("surname", equalTo("Kowalski"));
     }
+
+    @Test
+    @DisplayName("Should returns correctly user list")
+    public void shouldReturnsUserList(){
+        RestAssured
+                .given()
+                .get("http://www.mocky.io/v2/5a6a58222e0000d0377a7789")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .body("[0].imie", notNullValue())
+                .body("[0].imie", equalTo("Piotr"))
+                .body("[0].nazwisko", notNullValue())
+                .body("[0].nazwisko", equalTo("Kowalski"));
+
+    }
+
+    @Test
+    @DisplayName("Should returns correctly user list using jsonPath mapping")
+    public void jsonPathTest(){
+        List<User> users = RestAssured
+                .given()
+                .get("http://www.mocky.io/v2/5a6a58222e0000d0377a7789")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .body()
+                .jsonPath()
+                .getList("", User.class);
+
+        assertTrue(users.get(0).imie.equals("Piotr"));
+        assertTrue(users.get(0).nazwisko.equals("Kowalski"));
+        assertTrue(users.get(0).device.get(0).type.equals("computer"));
+        assertTrue(users.get(0).device.get(0).deviceModel.get(0).screenSize == 17);
+        assertTrue(users.size() > 0);
+
+    }
 }
+
