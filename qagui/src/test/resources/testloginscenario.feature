@@ -1,5 +1,6 @@
 Feature: User panel
 
+  @wordpress @login @userprofile
   Scenario: User login
 
     Given User start on main page

@@ -43,11 +43,11 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
-    public void waitForElementToBeVisibility(WebElement element) {
-        waitForElementToBeVisibility(element, 30);
-    }
-
-    public void waitForElementToBeVisibility(By by) {
-        waitForElementToBeVisibility(by, 30);
-    }
+//    public void waitForElementToBeVisibility(WebElement element) {
+//        waitForElementToBeVisibility(element, 30);
+//    }
+//
+//    public void waitForElementToBeVisibility(By by) {
+//        waitForElementToBeVisibility(by, 30);
+//    }
 }
