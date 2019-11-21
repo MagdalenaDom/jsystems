@@ -1,25 +1,22 @@
-package com.jsystems.qa.qagui;
+package com.jsystems.qa.qagui.classic;
 
-import com.jsystems.qa.qagui.pages.LoginPage;
-import com.jsystems.qa.qagui.pages.MainWordpressPage;
-import com.jsystems.qa.qagui.pages.UserPage;
+import com.jsystems.qa.qagui.Configuration;
+import com.jsystems.qa.qagui.classic.pages.LoginPage;
+import com.jsystems.qa.qagui.classic.pages.MainWordpressPage;
+import com.jsystems.qa.qagui.classic.pages.UserPage;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import static com.google.common.truth.Truth.assertThat;
-import static com.jsystems.qa.qagui.pages.LoginPage.primaryButtonSelector;
-import static com.jsystems.qa.qagui.pages.LoginPage.usernameOrEmailSelector;
-import static com.jsystems.qa.qagui.pages.UserPage.userAvatarSelector;
-import static com.jsystems.qa.qagui.pages.UserPage.userDisplayNameSelector;
+import static com.jsystems.qa.qagui.classic.pages.LoginPage.primaryButtonSelector;
+import static com.jsystems.qa.qagui.classic.pages.LoginPage.usernameOrEmailSelector;
+import static com.jsystems.qa.qagui.classic.pages.UserPage.userAvatarSelector;
+import static com.jsystems.qa.qagui.classic.pages.UserPage.userDisplayNameSelector;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
