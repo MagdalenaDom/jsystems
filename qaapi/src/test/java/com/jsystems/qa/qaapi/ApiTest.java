@@ -96,10 +96,29 @@ public class ApiTest {
     }
 
     @Test
-    @Disabled
+ //   @Disabled
     public void dbTest() {
         UserDb userDb = UserDao.getOneById(1L);
         assertThat(userDb.getName()).isEqualTo("Piotr");
+    }
+
+    @Test
+    public void getAllUserDb(){
+
+        List<UserDb> userDbs = UserDao.getAllUsers();
+        System.out.println(userDbs);
+        assertTrue(userDbs.size() > 0);
+    }
+
+    @Test
+    public void saveUserDb(){
+        UserDb userDb = new UserDb(4L, "Arnold", "Kowalski");
+        UserDao.saveUser(userDb);
+
+        UserDb userdb_1 = UserDao.getOneById(4L);
+        assertTrue(userdb_1.getId().equals(userDb.getId()));
+        assertTrue(userdb_1.getName().equals(userDb.getName()));
+        assertTrue(userdb_1.getSurname().equals(userDb.getSurname()));
     }
 
 }
