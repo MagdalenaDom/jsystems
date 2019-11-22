@@ -1,5 +1,8 @@
 package com.jsystems.qa.qaapi;
 
+import com.jsystems.qa.qaapi.model.azure.author.AzureAuthor;
+import com.jsystems.qa.qaapi.model.azure.book.Book;
+import com.jsystems.qa.qaapi.service.BookService;
 import com.jsystems.qa.qaapi.service.UserService;
 import io.restassured.RestAssured;
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static com.google.common.truth.Truth.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -65,5 +69,28 @@ public class ApiTest {
         assertTrue(users.size() > 0);
 
     }
+
+    @Test
+    @DisplayName("Get azure authors")
+    public void shouldReturnsAllAzureAuthorsList(){
+        List<AzureAuthor> azureAuthors = UserService.getAzureAuthors();
+
+        assertThat(azureAuthors.size()).isGreaterThan(0);
+
+        for(AzureAuthor azureAuthor : azureAuthors){
+            int firstNameId = Integer.parseInt(azureAuthor.firstName.replace("First Name", ""));
+            assertThat(azureAuthor.firstName).contains("First Name");
+            assertThat(azureAuthor.firstName).matches("First Name");
+        }
+    }
+
+    @Test
+    @DisplayName("Post Book test")
+    public void postBookTest(){
+        Book book = new Book(1, "Jsystems", "Szkolenia", 382, "en", "2019-11-22T09:41:54.440Z");
+
+        BookService.postBook(book, 200);
+    }
+
 }
 
