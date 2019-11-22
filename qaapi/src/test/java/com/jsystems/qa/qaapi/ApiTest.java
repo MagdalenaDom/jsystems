@@ -1,10 +1,13 @@
 package com.jsystems.qa.qaapi;
 
+import com.jsystems.qa.qaapi.database.UserDao;
 import com.jsystems.qa.qaapi.model.azure.author.AzureAuthor;
 import com.jsystems.qa.qaapi.model.azure.book.Book;
 import com.jsystems.qa.qaapi.service.BookService;
 import com.jsystems.qa.qaapi.service.UserService;
+import com.jsystems.qa.qaapi.user.UserDb;
 import io.restassured.RestAssured;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -90,6 +93,13 @@ public class ApiTest {
         Book book = new Book(1, "Jsystems", "Szkolenia", 382, "en", "2019-11-22T09:41:54.440Z");
 
         BookService.postBook(book, 200);
+    }
+
+    @Test
+    @Disabled
+    public void dbTest() {
+        UserDb userDb = UserDao.getOneById(1L);
+        assertThat(userDb.getName()).isEqualTo("Piotr");
     }
 
 }
